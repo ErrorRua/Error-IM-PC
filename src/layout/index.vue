@@ -1,0 +1,35 @@
+<template>
+  <div class="layout-container">
+    <Sidebar class="sidebar-container"></Sidebar>
+    <transition name="fade-transform" mode="out-in">
+      <router-view />
+    </transition>
+  </div>
+</template>
+
+<script>
+import Sidebar from "./Sidebar"
+export default {
+  components: {
+    Sidebar,
+  },
+  data() {
+    return {}
+  },
+  methods: {},
+}
+</script>
+
+<style lang="scss" scoped>
+.layout-container {
+  height: 100%;
+  display: flex;
+
+  .sidebar-container {
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    height: 100%;
+  }
+}
+</style>
