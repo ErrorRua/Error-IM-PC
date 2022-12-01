@@ -1,23 +1,24 @@
 <template>
   <div class="sidebar-container" ref="test">
     <el-menu
-      default-active="1"
       background-color="#2e2e2e"
       text-color="#fff"
       active-text-color="#fca311"
+      :default-active="$route.path"
       :collapse="true"
       class="sidebar"
+      :router="true"
     >
       <Avatar class="avatar"></Avatar>
-      <el-menu-item index="1">
+      <el-menu-item index="/chats">
         <i class="el-icon-chat-round"></i>
         <span slot="title">Error-IM</span>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item index="/contacts">
         <i class="el-icon-user"></i>
         <span slot="title">通讯录</span>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="/me">
         <i class="el-icon-setting"></i>
         <span slot="title">我的</span>
       </el-menu-item>
@@ -45,6 +46,7 @@ export default {
   }
   .sidebar {
     height: 100%;
+    border: none;
   }
 }
 </style>

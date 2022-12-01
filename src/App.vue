@@ -31,5 +31,8 @@ export default {
   height: 650px;
   margin: 0 auto;
   transform: translateY(-50%);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 </style>

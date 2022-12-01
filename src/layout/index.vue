@@ -2,7 +2,7 @@
   <div class="layout-container">
     <Sidebar class="sidebar-container"></Sidebar>
     <transition name="fade-transform" mode="out-in">
-      <router-view />
+      <router-view class="main-container" />
     </transition>
   </div>
 </template>
@@ -24,6 +24,12 @@ export default {
 .layout-container {
   height: 100%;
   display: flex;
+  .main-container {
+    flex: 1;
+    height: 100%;
+    overflow: auto;
+    background-color: #fff;
+  }
 
   .sidebar-container {
     // position: absolute;

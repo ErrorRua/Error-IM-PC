@@ -2,6 +2,7 @@ import axios from "axios"
 import { Message } from "element-ui"
 import store from "@/store"
 import { getToken } from "@/util/auth"
+import router from "@/router"
 
 const service = axios.create({
   baseURL: "/api",
@@ -31,7 +32,7 @@ service.interceptors.response.use(
     if (code === 200) {
       return data
     } else {
-      if (code === 10002) {
+      if (code === 401) {
         store.dispatch("user/logout")
         router.push("/login")
       }
@@ -42,7 +43,6 @@ service.interceptors.response.use(
   },
   (error) => {
     console.log(error)
-    debugger
     if (
       error.response &&
       error.response.data &&

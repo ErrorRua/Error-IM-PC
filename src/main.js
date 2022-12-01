@@ -26,6 +26,9 @@ Object.keys(directives).forEach((key) => {
 // vuex
 import store from "./store"
 
+// 权限控制
+import "@/permission"
+
 new Vue({
   render: (h) => h(App),
   router,

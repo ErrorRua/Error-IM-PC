@@ -26,12 +26,12 @@ const routes = [
         component: () => import("@/views/chats"),
       },
       {
-        path: "contacts",
+        path: "/contacts",
         name: "contacts",
         component: () => import("@/views/contacts"),
       },
       {
-        path: "me",
+        path: "/me",
         name: "me",
         component: () => import("@/views/me"),
       },

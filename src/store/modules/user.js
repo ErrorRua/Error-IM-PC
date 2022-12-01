@@ -24,14 +24,15 @@ const mutations = {
 }
 
 const actions = {
-  async login({ commit }, data) {
+  async login({ commit, dispatch }, data) {
     const result = await login(data)
     commit("setToken", result.token)
+    await dispatch("getUserInfo")
   },
   async logout({ commit }) {
-    await logout()
     commit("removeToken")
     commit("removeInfo")
+    await logout()
   },
   async getUserInfo({ commit }) {
     const info = await getInfo()
