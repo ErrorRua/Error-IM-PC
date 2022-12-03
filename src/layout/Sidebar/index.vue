@@ -4,7 +4,7 @@
       background-color="#2e2e2e"
       text-color="#fff"
       active-text-color="#fca311"
-      :default-active="$route.path"
+      :default-active="active"
       :collapse="true"
       class="sidebar"
       :router="true"
@@ -31,6 +31,17 @@ export default {
   components: {},
   data() {
     return {}
+  },
+  computed: {
+    active() {
+      if (this.$route.path.includes("/chats")) {
+        return "/chats"
+      } else if (this.$route.path.includes("/contacts")) {
+        return "/contacts"
+      } else if (this.$route.path.includes("/me")) {
+        return "/me"
+      }
+    },
   },
   methods: {},
   created() {},

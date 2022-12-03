@@ -1,4 +1,4 @@
-import request from "@/util/requets"
+import request from "@/util/request"
 
 export function uploadAvatar(data) {
   return request({

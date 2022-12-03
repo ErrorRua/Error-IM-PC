@@ -1,6 +1,11 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err)
+}
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,6 +34,19 @@ const routes = [
         path: "/contacts",
         name: "contacts",
         component: () => import("@/views/contacts"),
+        children: [
+          {
+            path: "/contacts/detail/:userId?",
+            name: "detail",
+            component: () => import("@/views/contacts/detail"),
+            props: true,
+          },
+          {
+            path: "/contacts/search",
+            name: "search",
+            component: () => import("@/views/contacts/search"),
+          },
+        ],
       },
       {
         path: "/me",

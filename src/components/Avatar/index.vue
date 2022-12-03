@@ -8,36 +8,8 @@
           alt=""
         />
       </div>
-
-      <el-card class="box-card">
-        <div slot="header" class="clearfix card-head">
-          <div class="avatar">
-            <img
-              :src="userInfo.avatar"
-              v-imagerror="require('@/assets/common/avatar.jpg')"
-              @click="showPreviewDialog = true"
-            />
-          </div>
-          <div class="info">
-            <span class="name">{{ userInfo.username }}</span>
-            <i
-              class="iconfont"
-              :class="{
-                'icon-nan': userInfo.sex == 0,
-                'icon-nv': userInfo.sex == 1,
-              }"
-            ></i>
-          </div>
-        </div>
-        <div class="card-body">
-          <send-button class="btn" :text="'发消息'"></send-button>
-        </div>
-      </el-card>
+      <info-card :user-info="userInfo"></info-card>
     </el-popover>
-    <preview-img
-      :showPreviewDialog.sync="showPreviewDialog"
-      :imgUrl="userInfo.avatar || require('@/assets/common/avatar.jpg')"
-    ></preview-img>
   </div>
 </template>
 
@@ -55,7 +27,6 @@ export default {
   data() {
     return {
       userInfo: {},
-      showPreviewDialog: false,
     }
   },
   methods: {
@@ -119,15 +90,4 @@ export default {
 }
 </style>
 
-<style lang="scss">
-.card-head {
-  .info {
-    .name {
-      font-size: 16px;
-      color: #333;
-      font-weight: 500;
-      margin-left: 10px;
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

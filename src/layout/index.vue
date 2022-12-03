@@ -27,7 +27,7 @@ export default {
   .main-container {
     flex: 1;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: #fff;
   }
 
