@@ -26,7 +26,7 @@
           v-model="userInfo.username"
           v-else
           maxlength="10"
-          @keyup.enter.native="changeUsername"
+          @keyup.enter.native="$event.target.blur()"
           @blur="changeUsername"
           ref="nameInput"
         ></el-input>
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { getInfo } from "@/api/user"
+import { getInfo, updateInfo } from "@/api/user"
 import QrCode from "qrcode"
 
 export default {
@@ -107,9 +107,17 @@ export default {
         this.$message.error("用户名不能为空")
         return
       }
+      try {
+        await updateInfo({ username: this.userInfo.username })
+        this.$message.success("修改成功")
+      } catch (error) {}
       this.changeNameShow = false
     },
-    changeSex() {
+    async changeSex() {
+      try {
+        await updateInfo({ sex: this.userInfo.sex })
+        this.$message.success("修改成功")
+      } catch (error) {}
       this.sexSelectVisible = false
     },
     async getInfo() {
