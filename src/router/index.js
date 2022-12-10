@@ -46,6 +46,11 @@ const routes = [
             name: "search",
             component: () => import("@/views/contacts/search"),
           },
+          {
+            path: "/contacts/new-friend",
+            name: "newFriend",
+            component: () => import("@/views/contacts/new-friend"),
+          },
         ],
       },
       {

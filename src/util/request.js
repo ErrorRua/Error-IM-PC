@@ -10,6 +10,8 @@ const service = axios.create({
   timeout: 5000,
 })
 
+// TODO: token过期时间
+
 service.interceptors.request.use(
   (config) => {
     if (store.getters.token) {

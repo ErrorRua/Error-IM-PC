@@ -7,11 +7,32 @@ export function getContactList() {
   })
 }
 
-export function addFriend(data) {
+export function getFriendRequestList() {
+  return request({
+    url: "/contact/list-request",
+    method: "get",
+  })
+}
+
+export function addFriendRequest(data) {
   return request({
     url: "/contact/add-friend",
     method: "post",
     data,
+  })
+}
+
+export function acceptFriendRequest(id) {
+  return request({
+    url: `/contact/accept-add-friend/${id}`,
+    method: "put",
+  })
+}
+
+export function rejectFriendRequest(id) {
+  return request({
+    url: `/contact/refuse-add-friend/${id}`,
+    method: "put",
   })
 }
 

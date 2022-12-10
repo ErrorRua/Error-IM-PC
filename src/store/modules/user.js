@@ -1,5 +1,8 @@
 import { getToken, setToken, removeToken } from "@/util/auth"
 import { login, getInfo, logout } from "@/api/user"
+import router from "@/router"
+
+import { Message } from "element-ui"
 
 const state = {
   token: getToken() || null,
@@ -30,9 +33,13 @@ const actions = {
     await dispatch("getUserInfo")
   },
   async logout({ commit }) {
-    commit("removeToken")
-    commit("removeInfo")
-    await logout()
+    try {
+      await logout()
+      Message.success("退出成功")
+      commit("removeToken")
+      commit("removeInfo")
+      router.push("/login")
+    } catch (error) {}
   },
   async getUserInfo({ commit }) {
     const info = await getInfo()

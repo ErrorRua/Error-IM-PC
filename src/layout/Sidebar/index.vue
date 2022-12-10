@@ -22,6 +22,10 @@
         <i class="el-icon-setting"></i>
         <span slot="title">我的</span>
       </el-menu-item>
+      <el-menu-item class="logout" @click="logout">
+        <i class="el-icon-switch-button"></i>
+        <span slot="title">退出登录</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -43,7 +47,11 @@ export default {
       }
     },
   },
-  methods: {},
+  methods: {
+    logout() {
+      this.$store.dispatch("user/logout")
+    },
+  },
   created() {},
 }
 </script>
@@ -58,6 +66,11 @@ export default {
   .sidebar {
     height: 100%;
     border: none;
+  }
+  .logout {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
 }
 </style>
