@@ -29,6 +29,7 @@
         <el-button
           type="success"
           v-if="userInfo.isFriend !== undefined && userInfo.isFriend === 0"
+          @click="addFriend"
         >
           添加好友
         </el-button>
@@ -59,7 +60,7 @@
 </template>
 
 <script>
-import { deleteFriend } from "@/api/contact"
+import { deleteFriend, addFriendRequest } from "@/api/contact"
 import { mapMutations } from "vuex"
 export default {
   components: {},
@@ -85,6 +86,12 @@ export default {
       await deleteFriend(this.userInfo.userId)
       this["contact/removeContacts"]()
       this.$message.success("删除成功")
+      this.$router.push("/contacts")
+      window.location.reload()
+    },
+    async addFriend() {
+      await addFriendRequest({ friendId: this.userInfo.userId })
+      this.$message.success("已发送好友请求")
       this.$router.push("/contacts")
       window.location.reload()
     },

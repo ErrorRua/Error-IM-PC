@@ -23,6 +23,7 @@
             avatar: require('@/assets/common/new-friend.png'),
           }"
           v-if="!addFriendModel"
+          @click.native="$router.push('/contacts/new-friend')"
         ></UserItem>
         <UserItem
           :user="{
@@ -38,6 +39,10 @@
     </section>
     <section class="right">
       <router-view />
+
+      <!-- <happy-scroll color="rgba(51,51,51,0.2)" size="5" hide-horizontal resize>
+        <router-view />
+      </happy-scroll> -->
     </section>
   </div>
 </template>
@@ -108,6 +113,26 @@ export default {
   .right {
     flex: 2.7;
     // background-color: #ccc;
+    // overflow: auto;
   }
 }
+</style>
+
+<style lang="scss">
+// .contact-container {
+//   .right {
+//     .happy-scroll-content {
+//       width: 100%;
+//     }
+//     .happy-scroll-strip {
+//       opacity: 0;
+//       transition: all 0.5s;
+//     }
+//     &:hover {
+//       .happy-scroll-strip {
+//         opacity: 1;
+//       }
+//     }
+//   }
+// }
 </style>
