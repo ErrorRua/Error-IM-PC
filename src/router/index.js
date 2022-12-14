@@ -23,12 +23,20 @@ const routes = [
     path: "/",
     name: "layout",
     component: () => import("@/layout"),
-    redirect: "/chats",
+    redirect: "/me", // 默认子路由
     children: [
       {
-        path: "/chats", // 默认子路由
+        path: "/chats",
         name: "chats",
         component: () => import("@/views/chats"),
+        children: [
+          {
+            path: "/chats/detail/:userId?",
+            name: "detail",
+            component: () => import("@/views/chats/detail"),
+            props: true,
+          },
+        ],
       },
       {
         path: "/contacts",

@@ -22,6 +22,10 @@ export default {
       type: String,
       default: "1595419368528044034",
     },
+    propUserInfo: {
+      type: Object,
+      default: undefined,
+    },
   },
   components: {},
   data() {
@@ -37,7 +41,11 @@ export default {
     },
   },
   created() {
-    this.getInfoById()
+    if (!this.propUserInfo) {
+      this.getInfoById()
+    } else {
+      this.userInfo = this.propUserInfo
+    }
   },
 }
 </script>

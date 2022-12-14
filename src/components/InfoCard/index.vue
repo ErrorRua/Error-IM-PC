@@ -25,6 +25,7 @@
           class="btn"
           :text="'发消息'"
           v-if="userInfo.isFriend !== undefined && userInfo.isFriend !== 0"
+          @click.native="sendMessage"
         ></send-button>
         <el-button
           type="success"
@@ -94,6 +95,10 @@ export default {
       this.$message.success("已发送好友请求")
       this.$router.push("/contacts")
       window.location.reload()
+    },
+    sendMessage() {
+      this.$store.commit("chat/createMessage", this.userInfo.userId)
+      this.$router.push({ path: "/chats/detail/" + this.userInfo.userId })
     },
   },
 }

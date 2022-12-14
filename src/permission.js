@@ -10,6 +10,13 @@ router.beforeEach(async function (to, from, next) {
   NProgress.start() // 开启进度条
   //  首先判断有无token
   if (store.getters.token) {
+    if (!store.getters.userId) {
+      // 如果没有id这个值 才会调用 vuex的获取资料的action
+      await store.dispatch("user/getUserInfo")
+    }
+    if (!store.getters.stompClient) {
+      await store.dispatch("websocket/WEBSOCKET_INIT")
+    }
     //   如果有token 继续判断是不是去登录页
     if (to.path === "/login" || to.path === "/register") {
       //  表示去的是登录页

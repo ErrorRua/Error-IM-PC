@@ -1,8 +1,10 @@
 import axios from "axios"
 import { Message } from "element-ui"
 import store from "@/store"
-import { getToken } from "@/util/auth"
+import { getToken, getTimestamp } from "@/util/auth"
 import router from "@/router"
+
+const TIMEOUT = 3600 * 1000
 
 const service = axios.create({
   baseURL: "/api",
@@ -15,6 +17,12 @@ const service = axios.create({
 service.interceptors.request.use(
   (config) => {
     if (store.getters.token) {
+      if (isTimeOut()) {
+        store.dispatch("user/logout")
+        Message.error("登录超时，请重新登录")
+        router.push("/login")
+        return Promise.reject(new Error("token超时"))
+      }
       config.headers["Authorization"] = getToken()
     }
     return config
@@ -35,7 +43,9 @@ service.interceptors.response.use(
       return data
     } else {
       if (code === 401) {
-        store.dispatch("user/logout")
+        if (store.getters.token) {
+          store.dispatch("user/logout")
+        }
         router.push("/login")
       }
       // 业务已经错误了 还能进then ? 不能 ！ 应该进catch
@@ -61,3 +71,9 @@ service.interceptors.response.use(
 )
 
 export default service
+
+function isTimeOut() {
+  const currentTime = Date.now()
+  const setTokenTime = getTimestamp()
+  return currentTime - setTokenTime > TIMEOUT
+}

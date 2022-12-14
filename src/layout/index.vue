@@ -9,6 +9,7 @@
 
 <script>
 import Sidebar from "./Sidebar"
+import { mapActions } from "vuex"
 export default {
   components: {
     Sidebar,
@@ -16,7 +17,13 @@ export default {
   data() {
     return {}
   },
-  methods: {},
+  methods: {
+    ...mapActions("websocket", {
+      initWebsocket: "WEBSOCKET_INIT",
+      websocketDisconnect: "WEBSOCKET_DISCONNECT",
+    }),
+  },
+  created() {},
 }
 </script>
 

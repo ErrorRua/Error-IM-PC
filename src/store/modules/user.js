@@ -1,7 +1,7 @@
-import { getToken, setToken, removeToken } from "@/util/auth"
+import { getToken, setToken, removeToken, setTimestamp } from "@/util/auth"
 import { login, getInfo, logout } from "@/api/user"
 import router from "@/router"
-
+import store2 from "store2"
 import { Message } from "element-ui"
 
 const state = {
@@ -13,6 +13,7 @@ const mutations = {
   setToken(state, token) {
     state.token = token
     setToken(token)
+    setTimestamp()
   },
   removeToken(state) {
     state.token = null
@@ -31,10 +32,15 @@ const actions = {
     const result = await login(data)
     commit("setToken", result.token)
     await dispatch("getUserInfo")
+    store2.set("userId", state.userInfo.userId)
   },
-  async logout({ commit }) {
+  async logout({ commit, dispatch }, timeout) {
     try {
-      await logout()
+      if (!timeout) {
+        await logout()
+      }
+      dispatch("websocket/WEBSOCKET_DISCONNECT", null, { root: true })
+      store2.remove("userId")
       Message.success("退出成功")
       commit("removeToken")
       commit("removeInfo")

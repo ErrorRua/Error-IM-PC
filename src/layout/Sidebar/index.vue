@@ -9,7 +9,7 @@
       class="sidebar"
       :router="true"
     >
-      <Avatar class="avatar"></Avatar>
+      <Avatar class="avatar" :userId="$store.getters.userId"></Avatar>
       <el-menu-item index="/chats">
         <i class="el-icon-chat-round"></i>
         <span slot="title">Error-IM</span>

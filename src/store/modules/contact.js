@@ -1,5 +1,6 @@
 import store2 from "store2"
 import { getContactList } from "@/api/contact"
+import router from "@/router"
 
 const state = {
   contacts: store2.get("contactList") || [],

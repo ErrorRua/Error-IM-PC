@@ -5,7 +5,7 @@
         :src="user.avatar"
         v-imagerror="require('@/assets/common/avatar.jpg')"
       />
-      <span v-if="message" class="badge">
+      <span v-if="message && message.unreadCnt" class="badge">
         {{ message.unreadCnt < 100 ? message.unreadCnt : 99 }}
       </span>
     </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="time">
           <span class="message-time">
-            {{ message.createTime | timeFilter }}
+            {{ message.sendTime | timeFilter }}
           </span>
         </div>
       </div>
@@ -42,16 +42,7 @@ export default {
   props: {
     user: {
       type: Object,
-      default: () => {
-        return {
-          userId: "1595419368528044034",
-          username: "一一一一一一一一一一",
-          sex: "0",
-          avatar:
-            "https://img2.baidu.com/it/u=1003272215,1878948666&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1670086800&t=2bd4037676cf6d41cd9b151f56bb5683",
-          email: "13632023866@163.com",
-        }
-      },
+      default: () => {},
     },
     message: {
       type: Object,
@@ -133,6 +124,13 @@ export default {
       color: #aaa;
       .message {
         width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        .message-content {
+          width: 100px;
+          overflow: hidden;
+        }
       }
     }
   }

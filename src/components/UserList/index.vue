@@ -7,6 +7,7 @@
           v-for="user in userList"
           :key="user.userId"
           :user="user"
+          :message="message(user)"
           @click.native="clickUser(user)"
         ></UserItem>
       </div>
@@ -35,8 +36,8 @@ export default {
     prefix() {
       if (this.$route.path.includes("/contacts")) {
         return "/contacts/detail/"
-      } else if (this.$route.path.includes("/chat")) {
-        return "/chat/detail/"
+      } else if (this.$route.path.includes("/chats")) {
+        return "/chats/detail/"
       } else {
         return ""
       }
@@ -44,7 +45,16 @@ export default {
   },
   methods: {
     clickUser(user) {
+      if (this.$route.path.includes("/chats")) {
+        this.$store.dispatch("chat/removeUnreadCnt", user.userId)
+      }
       this.$router.push(`${this.prefix}${user.userId}`)
+    },
+    message(user) {
+      if (this.$route.path.includes("/contacts")) {
+        return undefined
+      }
+      return this.$store.getters.lastMessage(user.userId)
     },
   },
 }
